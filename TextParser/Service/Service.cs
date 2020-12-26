@@ -7,9 +7,6 @@ namespace TextParser.Service
 {
     class Service : IService
     {
-        public Service()
-        { }
-
         public Text DeleteWordsOfSelectedLength(Text text, int length)
         {
             foreach (Article a in text.Articles)
@@ -21,7 +18,7 @@ namespace TextParser.Service
                         if (s.Items[i].IsWord())
                         {
                             Word word = s.Items[i] as Word;
-                            if(word.IsStartsWithVowel && word.Letters.Count == length)
+                            if(word.IsStartsWithConsonant && word.Letters.Count == length)
                             {
                                 s.Items.Remove(s.Items[i]);
                             }
@@ -62,10 +59,107 @@ namespace TextParser.Service
             return words;
         }
 
-        public Text SwapWordsOfSSelectedLengthWithSubstring(Text text, int length, string substring)
+        public Text SwapWordsOfSSelectedLengthWithSubstring(Text text,int index, int length, string substring)
         {
-            throw new NotImplementedException();
+            List<SentenceItem> substr = new List<SentenceItem>();
+            int i = 0;
+            char c;
+            while (i < substring.Length)
+            {
+                c = substring[i];
+                i++;
+                if (c >= 'а' && c <= 'я' || c >= 'А' && c <= 'Я' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')
+                {
+                    substr.Add(ReadWord(substring, ref i, ref c));
+                }
 
+                if (c != ' ')
+                {
+                    Punctuation punct = ReadPunctuation(substring, ref i, c);
+                    substr.Add(punct);
+                }
+            }
+            int j = 0;
+            foreach (Article a in text.Articles)
+            {
+
+                foreach (Sentence s in a.Sentences)
+                {
+                    j++;
+                    if (j == index)
+                    {
+                        for (i = 0; i < s.Items.Count; i++)
+                        {
+                            if (s.Items[i].IsWord())
+                            {
+                                Word word = s.Items[i] as Word;
+                                if (word.Letters.Count == length)
+                                {
+                                    s.Items.Remove(s.Items[i]);
+                                    foreach (SentenceItem si in substr)
+                                    {
+                                        s.Items.Insert(i, si);
+                                        i++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return text;
+        }
+
+        private static Punctuation ReadPunctuation(string substring,ref int i, char c)
+        {
+            Punctuation punctuation = new Punctuation();
+            bool flag = true;
+            punctuation.AddPunc(c);
+            if (i != substring.Length)
+            {
+                do
+                {
+                    c = substring[i];
+                    i++;
+                    if (c == '.')
+                    {
+                        punctuation.AddPunc(c);
+                    }
+                    else
+                    {
+                        flag = false;
+                    }
+                } while (flag && i < substring.Length);
+            }
+            return punctuation;
+        }
+
+        private static Word ReadWord(string substring,ref int i, ref char c)
+        {
+            Word word = new Word();
+            bool flag = true;
+            Letter l = new Letter(c);
+            word.AddSimbol(l);
+
+            if (i != substring.Length)
+            {
+                do
+                {
+                    c = substring[i];
+                    i++;
+                    if (c >= 'а' && c <= 'я' || c >= 'А' && c <= 'Я' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == '-' || c == '\'')
+                    {
+                        l = new Letter(c);
+                        word.AddSimbol(l);
+                    }
+                    else
+                    {
+                        flag = false;
+                    }
+                } while (flag && i < substring.Length);
+            }
+            c = ' '; 
+            return word;
         }
 
         public List<Sentence> TextSort(Text text)

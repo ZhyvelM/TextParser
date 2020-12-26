@@ -10,6 +10,6 @@ namespace TextParser.Service
         public List<Sentence> TextSort(Text text);
         public List<Word> FindWordsOfSeletedLengthInSenteces(Text text, int length);
         public Text DeleteWordsOfSelectedLength(Text text, int length);
-        public Text SwapWordsOfSSelectedLengthWithSubstring(Text text, int length, string substring);
+        public Text SwapWordsOfSSelectedLengthWithSubstring(Text text, int index, int length, string substring);
     }
 }

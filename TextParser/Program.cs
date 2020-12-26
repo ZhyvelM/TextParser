@@ -80,7 +80,14 @@ namespace TextParser
                         break;
                     case ('5'):
                         {
-
+                            Console.WriteLine("Enter index of sentence");
+                            int index = int.Parse(Console.ReadLine());
+                            Console.Write("Enter word length: ");
+                            int length = int.Parse(Console.ReadLine());
+                            Console.Write("Enter substring: ");
+                            string substring = Console.ReadLine();
+                            service.SwapWordsOfSSelectedLengthWithSubstring(text, index, length, substring);
+                            Console.WriteLine(text);
                         }
                         break;
                     default:
@@ -102,7 +109,7 @@ namespace TextParser
             Console.WriteLine("1.Parse text\n" +
                                 "2.Sentences in order\n" +
                                 "3.Words of selected length in exclamative sentences\n" +
-                                "4.Delete words started with vowel\n" +
+                                "4.Delete words started with consonant\n" +
                                 "5.Change word with substring\n" +
                                 "Any. Exit");
         }
