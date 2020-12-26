@@ -6,8 +6,10 @@ namespace TextParser
 {
     class Word : SentenceItem
     {
-        List<Letter> Letters { get; }
+        public List<Letter> Letters { get; }
         public override bool IsWord() => true;
+
+        public bool IsStartsWithVowel => "аёуеыоэяиюeyiuao".Contains(this.ToString().ToLower()[0]);
 
         public Word()
         {

@@ -15,14 +15,40 @@ namespace TextParser.Service
             throw new NotImplementedException();
         }
 
-        public Text FindWordsOfSeletedLengthInSenteces(Text text, int length)
+        public List<Word> FindWordsOfSeletedLengthInSenteces(Text text, int length)
         {
-            throw new NotImplementedException();
+            List<Word> words = new List<Word>();
+            HashSet<Word> words_h = new HashSet<Word>(new WordComparer());
+            foreach (Article a in text.Articles)
+            {
+                foreach (Sentence s in a.Sentences)
+                {
+                    if (s.Type == SentenceType.interrogative)
+                    {
+                        for(int i = 0; i < s.Items.Count; i++)
+                        {
+                            if (s.Items[i].IsWord())
+                            {
+                                Word w = s.Items[i] as Word;
+                                if (w.Letters.Count == length)
+                                {
+                                    if (words_h.Add(w))
+                                    {
+                                        words.Add(w);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return words;
         }
 
         public Text SwapWordsOfSSelectedLengthWithSubstring(Text text, int length, string substring)
         {
             throw new NotImplementedException();
+
         }
 
         public List<Sentence> TextSort(Text text)

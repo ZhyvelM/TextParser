@@ -7,7 +7,7 @@ namespace TextParser
     class Sentence
     {
         public List<SentenceItem> Items { get; }
-        SentenceType Type { get; set; }
+        public SentenceType Type { get; set; }
         public int WordsCount {
         get{
                 int count = 0;

@@ -11,6 +11,17 @@ namespace TextParser
         {
             Text text = new Text();
             IService service = new Service.Service();
+            try
+            {
+                using (StreamReader sr = new StreamReader(@"..\..\..\..\PathToFile.txt"))
+                {
+                    text = Parser.ParseFile(sr.ReadToEnd());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             bool flag = true;
             while (flag)
             {
@@ -52,7 +63,11 @@ namespace TextParser
                         break;
                     case ('3'):
                         {
-
+                            Console.Write("Enter word length: ");
+                            int length = int.Parse(Console.ReadLine());
+                            string words = "";
+                            service.FindWordsOfSeletedLengthInSenteces(text, length).ForEach(o => words += $"{o} ");
+                            Console.WriteLine(words);
                         }
                         break;
                     case ('4'):
