@@ -6,17 +6,17 @@ namespace TextParser
 {
     class Sentence
     {
-        List<SentenceItem> sentence;
-
+        List<SentenceItem> Items { get; }
+        SentenceType Type { get; }
         public Sentence()
         {
-            sentence = new List<SentenceItem>();
+            Items = new List<SentenceItem>();
         }
 
         public override string ToString()
         {
             string str = "";
-            sentence.ForEach(o => str += o.ToString());
+            Items.ForEach(o => str += o.ToString());
             return str;
         }
     }

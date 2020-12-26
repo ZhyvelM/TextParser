@@ -6,5 +6,9 @@ namespace TextParser
 {
     enum SentenceType
     {
+        declarative,
+        interrogative,
+        exclamative,
+        threeDots
     }
 }
