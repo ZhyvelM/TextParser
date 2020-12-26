@@ -28,10 +28,10 @@ namespace TextParser
             string str = "";
             for (int i = 0; i < Items.Count; i++)
             {
-                if (Items[i] is Word)
+                if (Items[i].IsWord())
                 {
                     str += (Items[i] as Word).ToString();
-                    if (Items[i+1] is Word)
+                    if (Items[i+1].IsWord())
                     {
                         str += " ";
                     }
@@ -39,7 +39,7 @@ namespace TextParser
                 else
                 {
                     str += (Items[i] as Punctuation).ToString();
-                    str += "";
+                    str += " ";
                 }
             }
             return str;

@@ -9,7 +9,12 @@ namespace TextParser
         List<Letter> Letters { get; }
         public override bool IsWord() => true;
 
-        public void addSimbol(Letter l)
+        public Word()
+        {
+            Letters = new List<Letter>();
+        }
+
+        public void AddSimbol(Letter l)
         {
             Letters.Add(l);
         }

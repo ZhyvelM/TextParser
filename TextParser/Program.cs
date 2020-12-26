@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using TextParser.Model;
 
 namespace TextParser
 {
@@ -7,6 +8,7 @@ namespace TextParser
     {
         static void Main(string[] args)
         {
+            Text text = new Text();
             bool flag = true;
             while (flag)
             {
@@ -27,15 +29,16 @@ namespace TextParser
                         {
                             try
                             {
-                                using (StreamReader sr = new StreamReader(@"..\..\..\..\..\PathToText.txt"))
+                                using (StreamReader sr = new StreamReader(@"..\..\..\..\PathToFile.txt"))
                                 {
-                                    Parser.ParseFile(sr.ReadToEnd());
+                                    text = Parser.ParseFile(sr.ReadToEnd());
                                 }
                             }
                             catch (Exception e)
                             {
                                 Console.WriteLine(e.Message);
                             }
+                            Console.WriteLine(text);
                         }
                         break;
                     case ('2'):

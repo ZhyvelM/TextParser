@@ -22,6 +22,7 @@ namespace TextParser
         {
             string str = "";
             Sentences.ForEach(o => str += o.ToString() + " ");
+            str += '\n';
             return str;
         }
     }
