@@ -72,7 +72,10 @@ namespace TextParser
                         break;
                     case ('4'):
                         {
-
+                            Console.Write("Enter word length: ");
+                            int length = int.Parse(Console.ReadLine());
+                            service.DeleteWordsOfSelectedLength(text, length);
+                            Console.WriteLine(text);
                         }
                         break;
                     case ('5'):

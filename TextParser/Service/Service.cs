@@ -12,7 +12,24 @@ namespace TextParser.Service
 
         public Text DeleteWordsOfSelectedLength(Text text, int length)
         {
-            throw new NotImplementedException();
+            foreach (Article a in text.Articles)
+            {
+                foreach (Sentence s in a.Sentences)
+                {
+                    for (int i = 0; i < s.Items.Count; i++)
+                    {
+                        if (s.Items[i].IsWord())
+                        {
+                            Word word = s.Items[i] as Word;
+                            if(word.IsStartsWithVowel && word.Letters.Count == length)
+                            {
+                                s.Items.Remove(s.Items[i]);
+                            }
+                        }
+                    }
+                }
+            }
+            return text;
         }
 
         public List<Word> FindWordsOfSeletedLengthInSenteces(Text text, int length)
