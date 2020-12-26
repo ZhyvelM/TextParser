@@ -6,12 +6,22 @@ namespace TextParser
 {
     class Article
     {
-        List<Sentence> article;
+        List<Sentence> Sentences { get; set; }
+
+        public Article()
+        {
+            Sentences = new List<Sentence>();
+        }
+
+        public void AddSentence(Sentence sentence)
+        {
+            Sentences.Add(sentence);
+        }
 
         public override string ToString()
         {
             string str = "";
-            article.ForEach(o => str += o.ToString());
+            Sentences.ForEach(o => str += o.ToString() + " ");
             return str;
         }
     }

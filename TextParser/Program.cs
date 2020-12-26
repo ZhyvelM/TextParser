@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace TextParser
 {
@@ -24,6 +25,17 @@ namespace TextParser
                 {
                     case ('1'):
                         {
+                            try
+                            {
+                                using (StreamReader sr = new StreamReader(@"..\..\..\..\..\PathToText.txt"))
+                                {
+                                    Parser.ParseFile(sr.ReadToEnd());
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
                         }
                         break;
                     case ('2'):

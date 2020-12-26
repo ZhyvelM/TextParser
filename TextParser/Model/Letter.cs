@@ -6,8 +6,12 @@ namespace TextParser
 {
     class Letter
     {
-        char letter;
+        char Simbol { get; }
 
-        public override string ToString() => letter.ToString();
+        public Letter(char c)
+        {
+            Simbol = c;
+        }
+        public override string ToString() => Simbol.ToString();
     }
 }

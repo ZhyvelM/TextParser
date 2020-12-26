@@ -6,7 +6,6 @@ namespace TextParser
 {
     abstract class SentenceItem
     {
-
         public abstract bool IsWord();
     }
 }

@@ -6,10 +6,20 @@ namespace TextParser
 {
     class Punctuation : SentenceItem
     {
-        string punct;
+        string Punct { get; set; }
+
+        public Punctuation()
+        {
+            Punct = "";
+        }
+
+        public void AddPunc(char c)
+        {
+            Punct += c;
+        }
 
         public override bool IsWord() => false;
 
-        public override string ToString() => punct;
+        public override string ToString() => Punct;
     }
 }
