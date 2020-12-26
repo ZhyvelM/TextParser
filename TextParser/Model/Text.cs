@@ -6,7 +6,7 @@ namespace TextParser.Model
 {
     class Text
     {
-        List<Article> Articles { get; }
+        public List<Article> Articles { get; }
 
         public Text ()
         {

@@ -39,23 +39,29 @@ namespace TextParser
         private static Article ReadArticle(StreamReader sr)
         {
             Article article = new Article();
+            char c;
             while (!sr.EndOfStream)
             {
-                article.AddSentence(ReadSentence(sr));
-                if((char)sr.Read() == '\n')
+                c = (char)sr.Read();
+                if (c == '\n')
                 {
                     return article;
                 }
+                article.AddSentence(ReadSentence(sr, c));
             }
             return article;
         }
 
-        private static Sentence ReadSentence(StreamReader sr)
+        private static Sentence ReadSentence(StreamReader sr, char c)
         {
             Sentence sentence = new Sentence();
+            if (c >= 'а' && c <= 'я' || c >= 'А' && c <= 'Я' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')
+            {
+                sentence.AddSentenceItem(ReadWord(sr, ref c));
+            }
             while (!sr.EndOfStream)
             {
-                char c = (char)sr.Read();
+                c = (char)sr.Read();
                 if (c >= 'а' && c <= 'я' || c >= 'А' && c <= 'Я' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')
                 {
                     sentence.AddSentenceItem(ReadWord(sr,ref c));

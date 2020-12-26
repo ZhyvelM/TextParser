@@ -6,8 +6,20 @@ namespace TextParser
 {
     class Sentence
     {
-        List<SentenceItem> Items { get; }
+        public List<SentenceItem> Items { get; }
         SentenceType Type { get; set; }
+        public int WordsCount {
+        get{
+                int count = 0;
+                Items.ForEach(o => {
+                    if (o.IsWord())
+                    {
+                        count++;
+                    }
+                });
+                return count;
+            }
+        }
         public Sentence()
         {
             Items = new List<SentenceItem>();

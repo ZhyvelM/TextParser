@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using TextParser.Model;
+using TextParser.Service;
 
 namespace TextParser
 {
@@ -9,13 +10,14 @@ namespace TextParser
         static void Main(string[] args)
         {
             Text text = new Text();
+            IService service = new Service.Service();
             bool flag = true;
             while (flag)
             {
                 menu();
                 string str = Console.ReadLine();
                 char c;
-                if (str.Length > 1)
+                if (str.Length > 1 || str.Length == 0)
                 {
                     c = '*';
                 }
@@ -43,18 +45,24 @@ namespace TextParser
                         break;
                     case ('2'):
                         {
+                            string sent = "";
+                            service.TextSort(text).ForEach(o => sent +=$" [{o.WordsCount}] {o}\n");
+                            Console.WriteLine(sent);
                         }
                         break;
                     case ('3'):
                         {
+
                         }
                         break;
                     case ('4'):
                         {
+
                         }
                         break;
                     case ('5'):
                         {
+
                         }
                         break;
                     default:
@@ -64,7 +72,9 @@ namespace TextParser
                         }
                 }
                 if (flag)
+                {
                     Console.ReadLine();
+                }
             }
         }
 

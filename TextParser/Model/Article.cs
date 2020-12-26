@@ -6,7 +6,7 @@ namespace TextParser
 {
     class Article
     {
-        List<Sentence> Sentences { get; set; }
+        public List<Sentence> Sentences { get; set; }
 
         public Article()
         {
