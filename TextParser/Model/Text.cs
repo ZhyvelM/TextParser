@@ -20,9 +20,7 @@ namespace TextParser.Model
 
         public override string ToString()
         {
-            string str = "";
-            Articles.ForEach(o => str += o.ToString());
-            return str;
+            return String.Join('\n',Articles);
         }
     }
 }

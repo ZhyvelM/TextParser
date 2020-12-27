@@ -9,7 +9,7 @@ namespace TextParser
         public List<Letter> Letters { get; }
         public override bool IsWord() => true;
 
-        public bool IsStartsWithConsonant => !"аёуеыоэяиюeyiuao".Contains(this.ToString().ToLower()[0]);
+        public bool IsStartsWithConsonant => !"аёуеыоэяиюeyiuao".Contains(Char.ToLower(this.ToString()[0]));
 
         public Word()
         {
@@ -23,9 +23,7 @@ namespace TextParser
 
         public override string ToString()
         {
-            string str = "";
-            Letters.ForEach(o => str += o.ToString());
-            return str;
+            return String.Join("",Letters);
         }
     }
 }

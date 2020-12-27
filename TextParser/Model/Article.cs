@@ -20,10 +20,7 @@ namespace TextParser
 
         public override string ToString()
         {
-            string str = "";
-            Sentences.ForEach(o => str += o.ToString() + " ");
-            str += '\n';
-            return str;
+            return String.Join(' ',Sentences);
         }
     }
 }

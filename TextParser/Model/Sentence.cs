@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace TextParser
@@ -10,14 +11,7 @@ namespace TextParser
         public SentenceType Type { get; set; }
         public int WordsCount {
         get{
-                int count = 0;
-                Items.ForEach(o => {
-                    if (o.IsWord())
-                    {
-                        count++;
-                    }
-                });
-                return count;
+                return Items.Count(o => o.IsWord());
             }
         }
         public Sentence()
@@ -51,7 +45,10 @@ namespace TextParser
                 else
                 {
                     str += (Items[i] as Punctuation).ToString();
-                    str += " ";
+                    if (i < Items.Count-1)
+                    { 
+                        str += " ";
+                    }
                 }
             }
             return str;

@@ -5,7 +5,7 @@ using TextParser.Model;
 
 namespace TextParser.Service
 {
-    class Service : IService
+    class TextParserTasksDelegate : IService
     {
         public Text DeleteWordsOfSelectedLength(Text text, int length)
         {
@@ -32,7 +32,7 @@ namespace TextParser.Service
         public List<Word> FindWordsOfSeletedLengthInSenteces(Text text, int length)
         {
             List<Word> words = new List<Word>();
-            HashSet<Word> words_h = new HashSet<Word>(new WordComparer());
+            HashSet<Word> singleWords = new HashSet<Word>(new WordComparer());
             foreach (Article a in text.Articles)
             {
                 foreach (Sentence s in a.Sentences)
@@ -46,7 +46,7 @@ namespace TextParser.Service
                                 Word w = s.Items[i] as Word;
                                 if (w.Letters.Count == length)
                                 {
-                                    if (words_h.Add(w))
+                                    if (singleWords.Add(w))
                                     {
                                         words.Add(w);
                                     }
